@@ -1,0 +1,20 @@
+{
+  "contributes.viewsContainers.activitybar.stockExplorerContainer.title": "股票總覽",
+  "contributes.views.stockExplorerContainer.name": "股票總覽",
+  "contributes.commands.stockExplorer.toggleDisplayMode.title": "切換顯示模式",
+  "contributes.commands.stockExplorer.addStock.title": "新增股票",
+  "contributes.commands.stockExplorer.removeStock.title": "刪除股票",
+  "contributes.commands.stockExplorer.buyStock.title": "買入股票",
+  "contributes.commands.stockExplorer.sellStock.title": "賣出股票",
+  "contributes.commands.stockExplorer.refresh.title": "重新整理",
+  "contributes.configuration.properties.stockExplorer.stocks.description": "要追蹤的股票清單。",
+  "contributes.configuration.properties.stockExplorer.stocks.items.properties.provider.description": "股票數據提供者。",
+  "contributes.configuration.properties.stockExplorer.stocks.items.properties.id.description": "股票識別碼 (如 \"tse_2330.tw\")。",
+  "contributes.configuration.properties.stockExplorer.stocks.items.properties.symbol.description": "股票代碼 (ex: \"2330\").",
+  "contributes.configuration.properties.stockExplorer.stocks.items.properties.displayName.description": "股票名稱 (ex: \"台積電\").",
+  "contributes.configuration.properties.stockExplorer.stocks.items.properties.holdings.amount.description": "持有的股票數量。",
+  "contributes.configuration.properties.stockExplorer.stocks.items.properties.holdings.price.description": "持有的股票買入價格。",
+  "contributes.configuration.properties.stockExplorer.updateInterval.description": "股票價格更新間隔時間 (秒)。",
+  "contributes.configuration.properties.stockExplorer.riseColor.description": "股票上漲時顯示的顏色 (預設:red)。",
+  "contributes.configuration.properties.stockExplorer.fallColor.description": "股票下跌時顯示的顏色 (預設:green)。"
+}

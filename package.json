@@ -1,0 +1,196 @@
+{
+  "name": "stock-explorer",
+  "displayName": "stock-explorer",
+  "description": "VS Code extension for tracking stock prices in real-time.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "l10n": "./l10n",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "stockExplorerContainer",
+          "title": "%contributes.viewsContainers.activitybar.stockExplorerContainer.title%",
+          "icon": "$(graph)"
+        }
+      ]
+    },
+    "views": {
+      "stockExplorerContainer": [
+        {
+          "id": "stockExplorerContainer.stockTree",
+          "name": "%contributes.views.stockExplorerContainer.name%",
+          "icon": "$(graph)"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "stockExplorer.toggleDisplayMode",
+        "title": "%contributes.commands.stockExplorer.toggleDisplayMode.title%",
+        "icon": "$(arrow-swap)"
+      },
+      {
+        "command": "stockExplorer.addStock",
+        "title": "%contributes.commands.stockExplorer.addStock.title%",
+        "icon": "$(add)"
+      },
+      {
+        "command": "stockExplorer.removeStock",
+        "title": "%contributes.commands.stockExplorer.removeStock.title%",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "stockExplorer.buyStock",
+        "title": "%contributes.commands.stockExplorer.buyStock.title%",
+        "icon": "$(add)"
+      },
+      {
+        "command": "stockExplorer.sellStock",
+        "title": "%contributes.commands.stockExplorer.sellStock.title%",
+        "icon": "$(remove)"
+      },
+      {
+        "command": "stockExplorer.refresh",
+        "title": "%contributes.commands.stockExplorer.refresh.title%",
+        "icon": "$(refresh)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "stockExplorer.addStock",
+          "when": "view == stockExplorerContainer.stockTree",
+          "group": "navigation@1"
+        },
+        {
+          "command": "stockExplorer.toggleDisplayMode",
+          "when": "view == stockExplorerContainer.stockTree",
+          "group": "navigation@2"
+        },
+        {
+          "command": "stockExplorer.refresh",
+          "when": "view == stockExplorerContainer.stockTree",
+          "group": "navigation@3"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "stockExplorer.buyStock",
+          "when": "view == stockExplorerContainer.stockTree && viewItem == stockItem",
+          "group": "inline@1"
+        },
+        {
+          "command": "stockExplorer.sellStock",
+          "when": "view == stockExplorerContainer.stockTree && viewItem == stockItem",
+          "group": "inline@2"
+        },
+        {
+          "command": "stockExplorer.removeStock",
+          "when": "view == stockExplorerContainer.stockTree && viewItem == stockItem",
+          "group": "inline@3"
+        }
+      ]
+    },
+    "configuration": {
+      "type": "object",
+      "title": "stock-explorer",
+      "properties": {
+        "stockExplorer.stocks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "provider": {
+                "type": "string",
+                "description": "%contributes.configuration.properties.stockExplorer.stocks.items.properties.provider.description%"
+              },
+              "id": {
+                "type": "string",
+                "description": "%contributes.configuration.properties.stockExplorer.stocks.items.properties.id.description%"
+              },
+              "symbol": {
+                "type": "string",
+                "description": "%contributes.configuration.properties.stockExplorer.stocks.items.properties.symbol.description%"
+              },
+              "displayName": {
+                "type": "string",
+                "description": "%contributes.configuration.properties.stockExplorer.stocks.items.properties.displayName.description%"
+              },
+              "holdings": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "amount": {
+                      "type": "number",
+                      "description": "%contributes.configuration.properties.stockExplorer.stocks.items.properties.holdings.amount.description%"
+                    },
+                    "price": {
+                      "type": "number",
+                      "description": "%contributes.configuration.properties.stockExplorer.stocks.items.properties.holdings.price.description%"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": "%contributes.configuration.properties.stockExplorer.stocks.description%"
+        },
+        "stockExplorer.updateInterval": {
+          "type": "number",
+          "default": 15,
+          "minimum": 0,
+          "description": "%contributes.configuration.properties.stockExplorer.updateInterval.description%"
+        },
+        "stockExplorer.riseColor": {
+          "type": "string",
+          "description": "%contributes.configuration.properties.stockExplorer.riseColor.description%"
+        },
+        "stockExplorer.fallColor": {
+          "type": "string",
+          "description": "%contributes.configuration.properties.stockExplorer.fallColor.description%"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run check-types && npm run lint && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "npm run check-types && npm run lint && node esbuild.js --production",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src test",
+    "test": "vscode-test",
+    "l10n": "npx @vscode/l10n-dev export -o ./l10n ./src"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "24.x",
+    "@types/vscode": "^1.140.0",
+    "@vscode/l10n-dev": "^0.0.35",
+    "@vscode/test-cli": "^0.0.15",
+    "@vscode/test-electron": "^3.0.0",
+    "esbuild": "^0.28.1",
+    "eslint": "^10.5.0",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.61.1"
+  },
+  "overrides": {
+    "diff": "^8.0.4",
+    "serialize-javascript": "^7.0.6"
+  }
+}

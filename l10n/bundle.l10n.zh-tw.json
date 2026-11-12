@@ -1,0 +1,23 @@
+{
+  "Added": "已新增",
+  "Amount must be a positive integer": "數量必須是大於 0 的整數",
+  "Are you sure you want to remove {0} from tracking list?": "確定要從追蹤列表中移除 {0} 嗎？",
+  "Avg Cost": "平均成本",
+  "Confirm Remove": "確定移除",
+  "Enter buy amount": "請輸入買進股數",
+  "Enter buy price": "請輸入買進成交單價",
+  "Enter sell amount": "請輸入賣出股數",
+  "Market Value": "當前總市值",
+  "N/A": "N/A",
+  "No holdings available to sell": "尚無持股可供賣出",
+  "Price must be a positive number": "價格必須是大於 0 的數字",
+  "Search stock by symbol or name": "以代碼或名稱搜尋股票",
+  "Select stock to buy": "選擇要買入的股票",
+  "Select stock to remove": "選擇要移除的股票",
+  "Select stock to sell": "選擇要賣出的股票",
+  "Sell amount exceeds current holdings (current: {0})": "賣出數量超過目前持股總數 (現有: {0} 股)",
+  "Shares": "持股數量",
+  "Stock is already in tracking list": "該股票已在追蹤清單中",
+  "Total Cost": "總投資成本",
+  "{0} has been removed from tracking list": "{0} 已從追蹤清單中移除"
+}

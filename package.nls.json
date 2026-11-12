@@ -1,0 +1,20 @@
+{
+  "contributes.viewsContainers.activitybar.stockExplorerContainer.title": "Stock Explorer",
+  "contributes.views.stockExplorerContainer.name": "Stock Explorer",
+  "contributes.commands.stockExplorer.toggleDisplayMode.title": "Toggle Display Mode",
+  "contributes.commands.stockExplorer.addStock.title": "Add Stock",
+  "contributes.commands.stockExplorer.removeStock.title": "Remove Stock",
+  "contributes.commands.stockExplorer.buyStock.title": "Buy Stock",
+  "contributes.commands.stockExplorer.sellStock.title": "Sell Stock",
+  "contributes.commands.stockExplorer.refresh.title": "Refresh",
+  "contributes.configuration.properties.stockExplorer.stocks.description": "List of stocks to track.",
+  "contributes.configuration.properties.stockExplorer.stocks.items.properties.provider.description": "Data provider for stock quotes.",
+  "contributes.configuration.properties.stockExplorer.stocks.items.properties.id.description": "Stock identifier (ex: \"tse_2330.tw\").",
+  "contributes.configuration.properties.stockExplorer.stocks.items.properties.symbol.description": "Stock symbol (ex: \"2330\").",
+  "contributes.configuration.properties.stockExplorer.stocks.items.properties.displayName.description": "Stock display name (ex: \"TSMC\").",
+  "contributes.configuration.properties.stockExplorer.stocks.items.properties.holdings.amount.description": "Number of held shares.",
+  "contributes.configuration.properties.stockExplorer.stocks.items.properties.holdings.price.description": "Price of held shares.",
+  "contributes.configuration.properties.stockExplorer.updateInterval.description": "Interval in seconds to update stock prices.",
+  "contributes.configuration.properties.stockExplorer.riseColor.description": "Color for price rise (default: red).",
+  "contributes.configuration.properties.stockExplorer.fallColor.description": "Color for price fall (default: green)."
+}

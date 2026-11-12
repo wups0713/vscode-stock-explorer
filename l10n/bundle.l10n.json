@@ -1,0 +1,23 @@
+{
+  "Added": "Added",
+  "Search stock by symbol or name": "Search stock by symbol or name",
+  "Stock is already in tracking list": "Stock is already in tracking list",
+  "Select stock to remove": "Select stock to remove",
+  "Confirm Remove": "Confirm Remove",
+  "Are you sure you want to remove {0} from tracking list?": "Are you sure you want to remove {0} from tracking list?",
+  "{0} has been removed from tracking list": "{0} has been removed from tracking list",
+  "Select stock to buy": "Select stock to buy",
+  "Enter buy amount": "Enter buy amount",
+  "Amount must be a positive integer": "Amount must be a positive integer",
+  "Enter buy price": "Enter buy price",
+  "Price must be a positive number": "Price must be a positive number",
+  "Select stock to sell": "Select stock to sell",
+  "No holdings available to sell": "No holdings available to sell",
+  "Enter sell amount": "Enter sell amount",
+  "Sell amount exceeds current holdings (current: {0})": "Sell amount exceeds current holdings (current: {0})",
+  "Shares": "Shares",
+  "Avg Cost": "Avg Cost",
+  "Total Cost": "Total Cost",
+  "Market Value": "Market Value",
+  "N/A": "N/A"
+}
