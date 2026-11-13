@@ -32,6 +32,12 @@ interface MisStockInfoItem {
   l?: string;
   d?: string;
   t?: string;
+  trade?: {
+    t?: string;
+    v?: number;
+    z?: string;
+    ft?: number;
+  }
 }
 
 interface MisResponse {
@@ -195,7 +201,7 @@ export class TwseStockProvider implements StockProvider {
           );
         }
 
-        const currentPrice = this.parseNumber(item.z);
+        const currentPrice = this.parseNumber(item.z) ?? this.parseNumber(item.trade?.z) ?? this.parseNumber(item.y);
         const closePrice = this.parseNumber(item.y);
         const openPrice = this.parseNumber(item.o);
         const highPrice = this.parseNumber(item.h);
