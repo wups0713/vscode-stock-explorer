@@ -358,21 +358,43 @@ export class StockExplorer implements vscode.Disposable {
   private async update(updateQuote: boolean): Promise<void> {
     this.outputChannel.appendLine(`Update data (updateQuote = ${updateQuote})`);
 
-    let stocks: Array<[stock: Stock, quote: StockQuote]> = [];
-    let newCachedQuotes: Map<string, StockQuote> = new Map<string, StockQuote>();
+    const currentStocks = this.configuration.stocks;
+    const stocks: Array<[stock: Stock, quote: StockQuote]> = [];
+    const updateStockGroups: Map<string, Stock[]> = new Map<string, Stock[]>();
+    const newCachedQuotes: Map<string, StockQuote> = new Map<string, StockQuote>();
 
-    for (const stock of this.configuration.stocks) {
-      try {
-        let quote = this.cachedQuotes.get(`${stock.id}-${stock.provider}`);
-  
-        if (!quote || updateQuote) {
-          quote = await this.stockProviderManager.getStockQuote(stock.provider, stock.id);
+    for (const stock of currentStocks) {
+      let quote = this.cachedQuotes.get(`${stock.id}-${stock.provider}`);
+
+      if (!quote || updateQuote) {
+        let updateStocks = updateStockGroups.get(stock.provider);
+
+        if (!updateStocks) {
+          updateStockGroups.set(stock.provider, [ stock ]);
+        } else {
+          updateStocks.push(stock);
         }
+      }
+    }
 
+    for (const [provider, updateStocks] of updateStockGroups) {
+      try {
+        let quotes = await this.stockProviderManager.getStockQuotes(provider, ...updateStocks.map((s) => s.id));
+
+        for (const quote of quotes) {
+          this.cachedQuotes.set(`${quote.id}-${quote.provider}`, quote);
+        }
+      } catch (error) {
+        this.outputChannel.appendLine(`Error getting stock quotes for provider '${provider}': ${error}`);
+      }
+    }
+
+    for (const stock of currentStocks) {
+      let quote = this.cachedQuotes.get(`${stock.id}-${stock.provider}`);
+
+      if (quote) {
         stocks.push([ stock, quote ]);
         newCachedQuotes.set(`${stock.id}-${stock.provider}`, quote);
-      } catch (error) {
-        // Continue processing other quotes on error
       }
     }
 
