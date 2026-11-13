@@ -12,3 +12,4 @@
 | 4 | 移除股票 (remove stock) | [remove-stock/README.md](./remove-stock/README.md) | 從追蹤清單中刪除股票（包含二次確認對話框機制） |
 | 5 | 買進股票 (buy stock) | [buy-stock/README.md](./buy-stock/README.md) | 輸入買進數量與單價，更新 `settings.json` 持股明細 |
 | 6 | 賣出股票 (sell stock) | [sell-stock/README.md](./sell-stock/README.md) | 輸入賣出數量，依 FIFO 原則扣減 `settings.json` 持股明細 |
+| 7 | 拖曳重新排序 (reorder stock) | [reorder-stock/README.md](./reorder-stock/README.md) | 在 Tree View 中透過拖曳調整股票項目的顯示順序，並同步更新設定檔 |

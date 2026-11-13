@@ -6,6 +6,8 @@ import { StockTreeItem } from '../stockTreeItem';
 import { StockTreeDetailItem } from './stockTreeDetailItem';
 
 export class StockTreeQuoteItem extends StockTreeItem {
+  public readonly parent: StockTreeItem | undefined;
+
   constructor(
     public stock: Stock,
     public quote: StockQuote,
@@ -62,19 +64,27 @@ export class StockTreeQuoteItem extends StockTreeItem {
     return [
       new StockTreeDetailItem(
         vscode.l10n.t('Shares'),
-        this.formatNumber(totalShares, 0, 0)
+        this.formatNumber(totalShares, 0, 0),
+        this.stock,
+        this
       ),
       new StockTreeDetailItem(
         vscode.l10n.t('Avg Cost'),
-        this.formatNumber(avgCost, 0, 2)
+        this.formatNumber(avgCost, 0, 2),
+        this.stock,
+        this
       ),
       new StockTreeDetailItem(
         vscode.l10n.t('Total Cost'),
-        this.formatNumber(totalCost, 0, 0)
+        this.formatNumber(totalCost, 0, 0),
+        this.stock,
+        this
       ),
       new StockTreeDetailItem(
         vscode.l10n.t('Market Value'),
-        this.formatNumber(marketValue, 0, 2)
+        this.formatNumber(marketValue, 0, 2),
+        this.stock,
+        this
       )
     ];
   }

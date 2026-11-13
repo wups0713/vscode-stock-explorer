@@ -3,6 +3,7 @@ import { Configuration, Stock } from './components/configuration';
 import { StockQuote } from './interfaces/stockQuote';
 import { StockProviderManager } from './stockProviderManager';
 import { StockTreeDataProvider } from './views/stockTree/stockTreeDataProvider';
+import { StockTreeDragAndDropController } from './views/stockTree/stockTreeDragAndDropController';
 import { StockTreeItem } from './views/stockTree/stockTreeItem';
 
 export class StockExplorer implements vscode.Disposable {
@@ -10,6 +11,7 @@ export class StockExplorer implements vscode.Disposable {
   private readonly configuration: Configuration;
   private readonly stockProviderManager: StockProviderManager;
   private readonly treeDataProvider: StockTreeDataProvider;
+  private readonly dragAndDropController: StockTreeDragAndDropController;
   private readonly treeView: vscode.TreeView<StockTreeItem>;
   private isUpdating: boolean = false;
   private timer: NodeJS.Timeout | undefined;
@@ -22,8 +24,11 @@ export class StockExplorer implements vscode.Disposable {
     this.configuration = new Configuration();
     this.stockProviderManager = new StockProviderManager(outputChannel);
     this.treeDataProvider = new StockTreeDataProvider(this.configuration);
+    this.dragAndDropController = new StockTreeDragAndDropController(this.configuration);
     this.treeView = vscode.window.createTreeView('stockExplorerContainer.stockTree', {
-      treeDataProvider: this.treeDataProvider
+      treeDataProvider: this.treeDataProvider,
+      dragAndDropController: this.dragAndDropController,
+      canSelectMany: true,
     });
 
     this.subscriptions.push(this.treeView);
@@ -43,7 +48,7 @@ export class StockExplorer implements vscode.Disposable {
       vscode.workspace.onDidChangeConfiguration(async (e) => {
         if (e.affectsConfiguration('stockExplorer')) {
           if (this.treeView.visible) {
-            await this.update(true);
+            await this.update(false);
             this.startTimer();
           } else {
             this.stopTimer();

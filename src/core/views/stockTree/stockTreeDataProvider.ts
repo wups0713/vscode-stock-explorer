@@ -52,6 +52,10 @@ export class StockTreeDataProvider implements vscode.TreeDataProvider<StockTreeI
     return element.getChildren();
   }
 
+  public getParent(element: StockTreeItem): StockTreeItem | undefined {
+    return element.parent;
+  }
+
   public set(stocks: Array<[stock: Stock, quote: StockQuote]>): void {
     let newItems: StockTreeQuoteItem[] = [];
 

@@ -10,5 +10,6 @@ export abstract class StockTreeItem extends vscode.TreeItem {
   }
 
   public abstract get stock(): Stock | undefined;
+  public abstract get parent(): StockTreeItem | undefined;
   public abstract getChildren(): StockTreeItem[];
 }
