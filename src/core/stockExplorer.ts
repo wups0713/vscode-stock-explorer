@@ -11,6 +11,7 @@ export class StockExplorer implements vscode.Disposable {
   private readonly stockProviderManager: StockProviderManager;
   private readonly treeDataProvider: StockTreeDataProvider;
   private readonly treeView: vscode.TreeView<StockTreeItem>;
+  private isUpdating: boolean = false;
   private timer: NodeJS.Timeout | undefined;
   private cachedQuotes: Map<string, StockQuote> = new Map<string, StockQuote>();
 
@@ -353,9 +354,30 @@ export class StockExplorer implements vscode.Disposable {
 
   public async onRefreshCommand(): Promise<void> {
     await this.update(true);
-  };
+  }
 
   private async update(updateQuote: boolean): Promise<void> {
+    if (this.isUpdating) {
+      return;
+    }
+
+    this.isUpdating = true;
+
+    try {
+      await vscode.window.withProgress(
+        {
+          location: { viewId: 'stockExplorerContainer.stockTree' }
+        },
+        async () => {
+          await this.performUpdate(updateQuote);
+        }
+      );
+    } finally {
+      this.isUpdating = false;
+    }
+  }
+
+  private async performUpdate(updateQuote: boolean): Promise<void> {
     this.outputChannel.appendLine(`Update data (updateQuote = ${updateQuote})`);
 
     const currentStocks = this.configuration.stocks;
@@ -400,7 +422,7 @@ export class StockExplorer implements vscode.Disposable {
 
     this.treeDataProvider.set(stocks);
     this.cachedQuotes = newCachedQuotes;
-  };
+  }
 
   private startTimer(): void {
     const interval = this.configuration.updateInterval;
