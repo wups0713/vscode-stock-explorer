@@ -52,3 +52,4 @@ npm install
 - ** TypeScript 型別檢查**：`npm run check-types`
 - **執行測試**：`npm test`
 - **打包套件**：`npm run package`
+- **打包為 `.vsix` 檔案**：`npx @vscode/vsce package`
